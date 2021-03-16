@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SSID_NAME=$(sudo iwgetid -r)
+
+echo "${SSID_NAME}"
