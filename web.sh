@@ -1,6 +1,7 @@
 #!/bin/bash
 BROWSER="brave-browser"
-PAGES="
+SEARCH="https://www.google.com/search?q"
+PAGES="csabaszilagyi.fi/start
 beta.protonmail.com
 calendar.google.com
 youtube.com
@@ -13,10 +14,11 @@ messenger.com
 wikipedia.org"
 PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "WEB:")
 
-if [ "$PAGE" ]; then
-	$BROWSER $PAGE
-
-# What to do if we just escape without choosing anything.
+if [[ $PAGE == *"."* ]]; then
+    $BROWSER $PAGE
+    echo "page opened"
+elif [ "$PAGE" ]; then
+    $BROWSER "$SEARCH=$PAGE"
 else
-    echo "Program terminated." && exit 1
+    echo "Program terminated. $PAGE" && exit 1
 fi
