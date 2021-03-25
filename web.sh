@@ -1,24 +1,31 @@
 #!/bin/bash
 BROWSER="brave-browser"
-SEARCH="https://www.google.com/search?q"
-PAGES="csabaszilagyi.fi/start
-beta.protonmail.com
-calendar.google.com
+SEARCH="https://www.google.com/search?q="
+HOMEPAGE="https://csabaszilagyi.fi/start"
+PAGES="Home
+reddit.com
 youtube.com
 twitch.tv
-reddit.com
-instagram.com
 twitter.com
+instagram.com
 facebook.com
 messenger.com
-wikipedia.org"
-PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "WEB:")
+wikipedia.org
+beta.protonmail.com
+calendar.google.com"
 
-if [[ $PAGE == *"."* ]]; then
+PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "")
+echo $PAGE
+
+if [[ $PAGE == "Home" ]]; then
+    $BROWSER $HOMEPAGE
+    echo "Homepage opened"
+elif [[ $PAGE == *"."* ]]; then
     $BROWSER $PAGE
-    echo "page opened"
+    echo "bookmark opened"
 elif [ "$PAGE" ]; then
-    $BROWSER "$SEARCH=$PAGE"
+    $BROWSER "$SEARCH$PAGE"
+    echo "search initiated"
 else
     echo "Program terminated. $PAGE" && exit 1
 fi
