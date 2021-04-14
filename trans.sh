@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ $1 ]
+if [ "$1" ]
 then
-  req=$1
+  req="$1"
 else
   req=$(xclip -o)
 fi
