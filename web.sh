@@ -1,5 +1,6 @@
 #!/bin/bash
-BROWSER="brave-browser"
+#BROWSER="brave-browser"
+BROWSER="firefox-nightly"
 SEARCH="https://www.google.com/search?q="
 HOMEPAGE="https://csabaszilagyi.fi/start"
 PAGES="Home
@@ -19,7 +20,7 @@ PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "")
 echo $PAGE
 
 if [[ $PAGE == "Home" ]]; then
-    $BROWSER $HOMEPAGE
+    $BROWSER
     echo "Homepage opened"
 elif [[ $PAGE == *"."* ]]; then
     $BROWSER $PAGE
