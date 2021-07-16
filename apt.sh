@@ -8,3 +8,8 @@ $updates = "none"
 else
 echo $icon $updates
 fi
+
+if [ $BLOCK_BUTTON = 1 ]
+then
+$HOME/.scripts/updates.sh
+fi
