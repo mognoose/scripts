@@ -8,7 +8,7 @@
 #convert /home/csaba/Pictures/wallpapers/purple-nebula-wallpaper2k.jpg -scale 2560x1440 /tmp/lock.png
 #rm /tmp/screenshot.png
 
-bg=$(awk -F'file=' '{print $2}' $HOME/.config/nitrogen/bg-saved.cfg)
+bg=$(grep file -m 1 $HOME/.config/nitrogen/bg-saved.cfg | cut -d '=' -f2)
 res=$(xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
 convert $bg -resize $res^ -gravity center -extent $res /tmp/lock.png
 
