@@ -13,4 +13,4 @@ pass=$(keepassxc-cli show -sa password $db $entry --key-file $keyfile --no-passw
 [[ -d "$dir" ]] || { echo "Dir not found...creating $dir"; sudo mkdir "$dir"; sudo chmod +rwx "$dir"; sudo chown $USER:$USER $dir;}
 
 #mount nas
-sshfs -o password_stdin admin@fs.csabaszilagyi.fi:/ $dir <<< $pass
+sshfs -o password_stdin admin@clsdesigns.synology.me:/ $dir <<< $pass
