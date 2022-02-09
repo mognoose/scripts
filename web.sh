@@ -1,8 +1,7 @@
 #!/bin/bash
-#BROWSER="brave-browser"
-BROWSER="firefox-nightly"
+DEFAULT="google-chrome"
 SEARCH="https://www.google.com/search?q="
-HOMEPAGE="https://csabaszilagyi.fi/start"
+HOMEPAGE="https://google.com"
 PAGES="Home
 reddit.com
 youtube.com
@@ -16,11 +15,17 @@ messenger.com
 beta.protonmail.com
 calendar.google.com"
 
+if [ -z $1 ]; then
+	BROWSER=$DEFAULT
+else
+	BROWSER=$1
+fi
+
 PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "")
 echo $PAGE
 
 if [[ $PAGE == "Home" ]]; then
-    $BROWSER
+    $BROWSER $HOMEPAGE
     echo "Homepage opened"
 elif [[ $PAGE == *"."* ]]; then
     $BROWSER $PAGE
