@@ -4,7 +4,11 @@
 API_KEY="a7d205b15edfacb6462b9916e1fd513a"
 # Check on http://openweathermap.org/find
 # Kauhajoki = 653627
-CITY_ID=653627
+# Helsinki = 658225
+#CITY_ID=658225
+
+IP=$(curl -s icanhazip.com)
+CITY=$(curl -s ipinfo.io/$IP/city)
 
 URGENT_LOWER=0
 URGENT_HIGHER=30
@@ -18,7 +22,8 @@ ICON_FOG=""
 
 SYMBOL_CELSIUS="℃"
 
-WEATHER_URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&appid=${API_KEY}&units=metric"
+#WEATHER_URL="http://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&appid=${API_KEY}&units=metric"
+WEATHER_URL="api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric"
 
 WEATHER_INFO=$(wget -qO- "${WEATHER_URL}")
 WEATHER_MAIN=$(echo "${WEATHER_INFO}" | grep -o -e '\"main\":\"[a-Z]*\"' | awk -F ':' '{print $2}' | tr -d '"')
