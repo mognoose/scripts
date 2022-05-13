@@ -93,13 +93,6 @@ function listEvents(auth) {
           let start =
             moment(event.start.dateTime).format(dateFormat) ||
             moment(event.start.date).format(dateFormat);
-          var options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          };
-
           if (event.hangoutLink)
             console.log(
               start + ' | ' + event.summary + ' | ' + event.hangoutLink
