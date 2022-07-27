@@ -7,7 +7,7 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const PATH = '/home/csaba/.scripts/cal/';
+const PATH = '/home/csaba/.scripts/calnode/';
 const TOKEN = PATH + 'token.json';
 
 // Load client secrets from a local file.
@@ -93,10 +93,13 @@ function listEvents(auth) {
           let start =
             moment(event.start.dateTime).format(dateFormat) ||
             moment(event.start.date).format(dateFormat);
-          if (event.hangoutLink)
-            console.log(
-              start + ' | ' + event.summary + ' | ' + event.hangoutLink
-            );
+          console.log(
+            start +
+              ' | ' +
+              event.summary +
+              ' | ' +
+              (event.hangoutLink ? event.hangoutLink : '-')
+          );
         });
       } else {
         console.log('No upcoming events found.');

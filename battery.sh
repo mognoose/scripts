@@ -1,4 +1,4 @@
-battery=/sys/class/power_supply/BAT1/
+battery=/sys/class/power_supply/BAT0/
 capacity=$(cat "$battery"/capacity)
 status=$(cat "$battery"/status)
 

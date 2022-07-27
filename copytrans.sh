@@ -1,3 +1,3 @@
-#!bin/bash
+#!/bin/bash
 
-xsel -o | trans -brief
+notify-send $(xsel -o | trans -brief)
