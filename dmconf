@@ -9,7 +9,7 @@
 # Defining the text editor to use.
 # DMENUEDITOR="st -e vim"
 # DMENUEDITOR="st -e nvim"
-DMEDITOR="code"
+DMEDITOR="code -n"
 
 # An array of options to choose.
 # You can edit this list to add/remove config files.
