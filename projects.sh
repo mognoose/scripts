@@ -10,7 +10,7 @@ choice=$(printf '%s\n' "${projects[@]}" | rofi -dmenu -font "lato 18" -i -p 'Ope
 echo $choice
 
 if [ "$choice" ]; then
-    $EDITOR "$HOME/Projects/$choice" && $TERMINAL " -1 -d $HOME/Projects/$choice"
+    $EDITOR "$HOME/Projects/$choice" && $TERMINAL -1 /home/csaba/Projects/$choice/
 
 else
     echo "Program terminated." && exit 1
