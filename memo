@@ -1,0 +1,11 @@
+#!/bin/bash
+file=$HOME/.scripts/memodata
+memo=$(rofi -input $file -dmenu -font "lato 18" -i -p "Memos: " -window-command "ls")
+if grep "$memo" "$file"; then
+  echo "SomeString was found"
+  sed -i "/$memo/d" $file
+  exit 0
+fi
+
+echo "$memo" >> $file
+exit 0
