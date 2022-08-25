@@ -2,7 +2,8 @@ a=$(echo "Sleep\nLock\nLogout\nRestart\nShutdown\nCancel" | rofi -dmenu -font "l
 if [ $a = "Sleep" ]
 then
 	#sudo systemctl suspend
-	sh $HOME/.scripts/lock.sh && sudo systemctl suspend
+	#sh $HOME/.scripts/lock.sh && sudo systemctl suspend
+	sudo systemctl suspend
 elif [ $a = "Logout" ]
 then
 	i3-msg exit
