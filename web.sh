@@ -3,10 +3,27 @@ DEFAULT="google-chrome"
 SEARCH="https://www.google.com/search?q="
 HOMEPAGE="https://google.com"
 declare -a BROWSERS
-BROWSERS=("google-chrome" "brave-browser" "firefox")
-BROWSERSNAMES="Chrome
-Brave
-Firefox"
+BROWSERSNAMES
+
+if google-chrome --version &> /dev/null
+then
+    BROWSERS+=("google-chrome")
+    BROWSERSNAMES+=("Chrome,")
+
+fi
+
+if brave-browser --version &> /dev/null
+then
+    BROWSERS+=("brave-browser")
+    BROWSERSNAMES+="Brave,"
+fi
+
+if firefox --version &> /dev/null
+then
+    BROWSERS+=("firefox")
+    BROWSERSNAMES+="Firefox,"
+fi
+
 PAGES="Home
 reddit.com
 youtube.com
@@ -21,7 +38,7 @@ beta.protonmail.com
 calendar.google.com"
 
 if [ -z $1 ]; then
-	BROWSERINDEX=$(echo "$BROWSERSNAMES" | rofi -font 'lato 18' -dmenu -i -p "Browser:" -format i)
+	BROWSERINDEX=$(echo $BROWSERSNAMES | rofi -font 'lato 18' -dmenu -i -p "Browser:" -format i -sep ',')
     BROWSER=${BROWSERS[$BROWSERINDEX]}
 else
 	BROWSER=$1
