@@ -2,8 +2,10 @@
 
 SSID_NAME=$(sudo iwgetid -r)
 VPN="$(nmcli -f GENERAL.STATE connection show LamiaVPN)"
-if [ -z "$VPN" ]; then
-    echo "${SSID_NAME}"
-else
+if [ -n "$SSID_NAME" ]; then
+    echo "WIFI CONNECTED"
+if [ -n "$VPN" ]; then
     echo " ${SSID_NAME}"
+else
+    echo "${SSID_NAME}"
 fi

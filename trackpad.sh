@@ -18,10 +18,9 @@ if [ -z $3 ]
 fi
 
 #Touchpad id
-libinput-gestures-setup stop
-libinput-gestures-setup start
+bluetoothctl connect BC:D0:74:B8:4C:13
 echo "Getting touchpad id"
-id=$(xinput --list | grep -m 3 SYNA | tail -n1 | awk {'print $5'} | sed 's/id=//g')
+id=$(xinput --list | grep -m 1 Trackpad | awk {'print $8'} | sed 's/id=//g')
 echo "Touchpad id: $id"
 echo "setting props: tap:$tap, nat:$nat, mid:$mid"
 xinput --set-prop $id "libinput Tapping Enabled" $tap
@@ -30,4 +29,6 @@ xinput --set-prop $id "libinput Middle Emulation Enabled" $mid
 xinput --list-props $id | grep "libinput Tapping Enabled ("
 xinput --list-props $id | grep "libinput Natural Scrolling Enabled ("
 xinput --list-props $id | grep "libinput Middle Emulation Enabled ("
+libinput-gestures-setup stop
+libinput-gestures-setup start
 echo "done"

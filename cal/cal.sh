@@ -25,9 +25,13 @@ checkToken() {
 }
 
 authorize() {
-  echo "Authorize this app by visiting this url:"
-  echo "https://accounts.google.com/o/oauth2/v2/auth?client_id=$client_id&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/calendar.events&response_type=code"
-  read -p "Enter the code from that page here: " authcode
+  # echo "Authorize this app by visiting this url:"
+  # echo "https://accounts.google.com/o/oauth2/v2/auth?client_id=$client_id&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/calendar.events&response_type=code"
+  # read -p "Enter the code from that page here: " authcode
+  authcode=$(rofi -dmenu -font "lato 18" -i -p "Get authorization code from browser. App will resume in 10 seconds after you hit enter")
+  google-chrome --new-window "https://accounts.google.com/o/oauth2/v2/auth?client_id=$client_id&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/calendar.events&response_type=code"
+  sleep 10
+  authcode=$(rofi -dmenu -font "lato 18" -i -p "Paste authorization code: ")
   curl -s \
     --request POST \
     --data "code=$authcode&client_id=$client_id&client_secret=$client_secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" \
@@ -62,6 +66,7 @@ getEvents() {
   URL=$(cut -d "|" -f3 <<<$MEET)
   if [ "$URL" ]; then
     google-chrome --new-window $URL
+    exit 1
   else
     echo "Program terminated." && exit 1
   fi

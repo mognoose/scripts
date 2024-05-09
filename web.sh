@@ -24,6 +24,12 @@ then
     BROWSERSNAMES+="Firefox,"
 fi
 
+if qutebrowser --version &> /dev/null
+then
+    BROWSERS+=("qutebrowser")
+    BROWSERSNAMES+="Qutebrowser"
+fi
+
 PAGES="Home
 reddit.com
 youtube.com
@@ -48,7 +54,7 @@ PAGE=$(echo "$PAGES" | rofi -font 'lato 18' -dmenu -i -p "")
 echo $PAGE
 
 if [[ $PAGE == "Home" ]]; then
-    $BROWSER $HOMEPAGE
+    $BROWSER
     echo "Homepage opened"
 elif [[ $PAGE == *"."* ]]; then
     $BROWSER $PAGE

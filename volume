@@ -30,10 +30,11 @@ MIXER="pulse"
 # The instance option sets the control to report and configure
 # This defaults to the first control of your selected mixer
 # For a list of the available, use `amixer -D $Your_Mixer scontrols`
-SCONTROL="${BLOCK_INSTANCE:-$(amixer -D $MIXER scontrols |
-                  sed -n "s/Simple mixer control '\([A-Za-z ]*\)',0/\1/p" |
-                  head -n1
-                )}"
+SCONTROL="${BLOCK_INSTANCE:-$(
+  amixer -D $MIXER scontrols |
+    sed -n "s/Simple mixer control '\([A-Za-z ]*\)',0/\1/p" |
+    head -n1
+)}"
 
 # The first parameter sets the step to change the volume by (and units to display)
 # This may be in in % or dB (eg. 5% or 3dB)
@@ -52,9 +53,9 @@ volume() {
 
 format() {
   perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
-  perl_filter+='{CORE::say $4 eq "off" ? "MUTE" : "'
+  perl_filter+='{CORE::say $4 eq "off" ? "󰸈" : "'
   # If dB was selected, print that instead
-  perl_filter+=$([[ $STEP = *dB ]] && echo '$3' || echo '$1')
+  perl_filter+=$([[ $STEP = *dB ]] && echo ' $3' || echo ' $1')
   perl_filter+='"; exit}'
   perl -ne "$perl_filter"
 }
@@ -62,10 +63,12 @@ format() {
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
-  1) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
-  3) pavucontrol ;;
-  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
-  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+1) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;; # right click, mute/unmute
+2) pavucontrol ;;
+3) pavucontrol ;;
+# 3) $HOME/.scripts/pactlsink.sh ;;
+4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
+5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
 esac
 
 volume | format

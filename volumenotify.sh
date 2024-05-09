@@ -1,7 +1,7 @@
 #!bin/bash
 
-vol=$(amixer -c 1 -M -D pulse get Master | awk {'print $5'} | grep -m 1 %)
-vol=$(echo "$vol" | tr -d "[]%")
+vol=$(amixer -c 0 -M -D pulse get Master | awk {'print $5'} | grep -m 1 %)
+vol=$(echo " $vol" | tr -d "[]%")
 icon=audio-volume-mute
 
 #if [ $vol -ge 66 ]

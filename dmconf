@@ -7,8 +7,7 @@
 # Contributors: Derek Taylor
 
 # Defining the text editor to use.
-# DMENUEDITOR="st -e vim"
-# DMENUEDITOR="st -e nvim"
+# DMEDITOR="kitty -e vim"
 DMEDITOR="code -n"
 
 # An array of options to choose.
@@ -23,6 +22,7 @@ declare -a options=(
 "dunst - $HOME/.config/dunstrc1"
 "rofi - $HOME/.config/rofi/config"
 "rofi-theme - /usr/share/rofi/themes/sapatti.rasi"
+"vim - $HOME/.config/nvim/init.vim"
 )
 
 # Piping the above array into dmenu.
