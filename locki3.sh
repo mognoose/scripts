@@ -21,7 +21,7 @@ if i3-msg -t get_tree | grep -Fq '"class":"i3bar"'; then
 else
     xdotool mousemove $(($x/2)) $(($y/2))
     # i3-msg "workspace back_and_forth"
-    i3-msg "workspace 9, workspace 2, workspace 1"
+    i3-msg "workspace 4, workspace 2, workspace 1"
     i3-msg bar mode dock
     i3-msg mode "default"
     dunstctl set-paused false
